@@ -50,7 +50,6 @@
      (nav-fixed (nav-with-active nav active-nav))
      [:div.container body]
      [:footer.footer
-      [:div.container
-       [:p.pull-right
-        [:a {:href "#"} "Back to top"]]
-       [:p "Built with Twitter Bootstrap"]]]]]))
+      [:div.container.text-center
+       [:p.text-muted.credit
+        "Footer"]]]]]))

@@ -3,6 +3,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.1.8"]
                  [ring/ring-jetty-adapter "1.1.6"]
-                 [hiccup "1.0.5"]]
+                 [hiccup "1.0.5"]
+                 [markdown-clj "0.9.47"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler blogmudgeon.core/app})

@@ -1,35 +1,38 @@
 (ns blogmudgeon.views.index
   (:use [hiccup.core]
-        [hiccup.page])
+        [hiccup.page]
+        [markdown.core])
     (:require (blogmudgeon.views
                 [utils :as utils]
                 [layout :as layout])))
 
 (defn view-index []
   (layout/layout
-    "Welcome"
+    "Blogmudgeon"  ;; TODO: make this the blog title
     (html
-      [:div.jumbotron
-       [:h1 "Hello, world!"]
-       [:p "Vestibulum id ligula porta felis euismod semper. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."]
-       [:p [:a.btn.btn-default.btn-lg "Learn more &raquo;"]]]
       [:div.row
        (utils/summary-block
         5
-        "Heading"
-        "Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
+        "Most recent post"
+        "This is a blog I'm writing.  I'm writing both a blog (kenmudgeon.com) and the software that powers it (github.com/kengruven/blogmudgeon)."
         "#"
-        "View details &raquo;")
+        "Full article &raquo;")
        (utils/summary-block
         6
-        "Heading"
-        "Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
+        "Second most recent post"
+        "It doesn't really do anything yet."
         "#"
-        "View details &raquo;")
+        "Nothing to see here &raquo;")
        (utils/summary-block
         5
-        "Heading"
-        "Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
+        "Third most recent post"
+        "The point of this, so far, is to make sure I can commit, push, and deploy easily."
         "#"
-        "View details &raquo;")])
+        "Nothing to see here &raquo;")
+       (utils/summary-block
+        5
+        "Markdown test"
+        (markdown.core/md-to-html-string "This string is *Markdown!*")
+        "#"
+        "Nothing to see here &raquo;")])
     :home))
