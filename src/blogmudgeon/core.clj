@@ -9,7 +9,15 @@
 
 (defroutes main-routes
   (GET "/" [] (index/view-index))
-  (route/files "/" {:root "public"})
+
+  ;; HACK:
+  ;; - lein-ring "server" defaults to using "public/" for compojure routing here.
+  ;; --- but setting {:root "resources"} for the route/resources call doesn't work, for some reason.
+  ;; - lein-ring "uberjar" packages "resources/" in the jar.
+  ;; --- but i can't figure out how to change this, or even where it's done!
+  ;; so for now, resources/public is a symlink -> public/.  ugh.
+  (route/resources "/")
+
   (route/not-found "Page not found"))
 
 (def app
