@@ -46,6 +46,7 @@ Back on the server:
 - in ~blogmudgeon/releases, ln -s blogmudgeon-0.0.1-SNAPSHOT-standalone.jar blogmudgeon-latest.jar
 - mkdir /etc/service/blogmudgeon (and chown it to the user, and everything below it)
 - create /etc/service/blogmudgeon/run, with this script:
+
     #!/bin/sh
     JAVA_HOME=/usr
     JAVA_BIN=$JAVA_HOME/bin/java
@@ -61,6 +62,7 @@ the old Java process.
 
 Server nginx config:
 - make a new file /etc/nginx/sites-available/blogmudgeon that looks like:
+
     server {
         listen 80;
         server_name your_blog_name.com, *.your_blog_name.com;
