@@ -1,0 +1,51 @@
+TODO LIST!  visuals only, for starters:
+
+- NAVBAR:
+--- get rid of "home" tab
+--- get rid of "contact" tab -- everything ABOUT the blog goes on the "about" page
+--- add shadows for header/footer
+--- MAYBE?: make footer color go all the way to the bottom?
+--- pick better colors!
+
+- CONTENT:
+--- make article view better: permalink, title=link, no "full article->"?, etc.
+
+- DATABASE:
+--- have it connect to a database, and do "select 1;" on page-load.
+--- make a 'blogs' table, with one record (id, title, author_name, author_email, colors/styles, etc.)
+--- make a 'posts' table, with (id, blog_id, content, created, updated)  [FOR NOW: edit in-place]
+--- 
+
+- SIDEBAR:
+--- FUTURE/MAYBE?: make the search box smaller?
+--- FUTURE: different icon for "created"/"updated" entries
+----- and a way to toggle between them?
+
+- MISC:
+--- FUTURE: pick a better font for everything?
+
+
+
+----------------------------------------------------------------------
+
+OLD LIST:
+
+;; TODO:
+;; - [ ] make regular content go around it, not under it!  how?
+;; - [.] title area (who/what)
+;; --- [ ] TODO: get name/info from database
+;; --- [ ] TODO: link to full contact-info page?  ("about..." -> /about, maybe?  like app name -> about in a desktop app!)
+;; - [.] search box
+;; --- [ ] FIXME: move styling out into blogmudgeon.css
+;; --- [ ] TODO: make click/return actually do something -- submit request, show results right below it (ajax?)?
+;; - [?] (log-in button?)
+;; - [ ] recent additions/update (3-5?)
+;; --- [ ] FIXME: style it not like a bulleted-list
+;; --- [ ] TODO: make them links to the relevant articles...
+;; --- [ ] FUTURE?: distinguish between "added" and "updated"?
+;; - [ ] mini-calendar
+;; --- [ ] generate actual dates, for the 5(?) weeks, leading up to the current week.
+;; ----- NEED: something to generate HTML(?) for one row of weeks!  right?
+;; --- [ ] MAYBE: show the month, too?  i think it's kind of important.
+;; --- [ ] make them bright, and link to the first(?) post of that date, if there is one
+;; --- [ ] add controls so i can scroll fwd/back one week at a time

@@ -4,6 +4,10 @@ blogmudgeon
 This is a blog I'm writing, because I'm not happy with any existing
 blog, and also as an excuse to play with Clojure.
 
+It's completely unusable as a blog, yet.  This is a from-scratch
+project I'm doing in public, *not* a working software product I'm
+open-sourcing.
+
 Goals:
 - As simple as possible, internally and externally, for readers, writers, and maintainers
 - Runs on modern browsers (incl mobile) -- no particular backwards-compat goals
@@ -21,8 +25,11 @@ Goals:
 Non-goals:
 - Multiple users, or multiple blogs -- run your own copy!
 - Extreme customization capabilities
-- Photos and multimedia
-- Social media integration
+- Photos and multimedia -- I may add the ability to attach images, eventually, but it's not going to be the primary goal, and it's not for you if you're going to want to attach big stylish stock photos everywhere
+- Social media integration -- gag
+- Comments -- if a reader wants to reply, they can use email; I've not seen a blog with comments that I thought were worthwhile, overall
+- Banner advertisements -- again, not my thing
+- Tags? -- maybe later, but not a primary concern
 
 
 Installation
@@ -65,7 +72,7 @@ Server nginx config:
 
         server {
             listen 80;
-            server_name your_blog_name.com, *.your_blog_name.com;
+            server_name your_blog_name.com *.your_blog_name.com;
             location / {
                 proxy_pass http://localhost:3000;
             }
