@@ -6,7 +6,6 @@
             [blogmudgeon.views.layout :as layout]
             [blogmudgeon.db.db :as db]))
 
-;; FIXME: the main page should show entire articles.  i'll need a "summary" view (e.g., for search), but i won't use it here.
 (defn view-index []
   (layout/layout
    ((db/blog-info) :title)
@@ -14,13 +13,27 @@
     [:div.row
      (interpose [:hr]
                 (for [post (jdbc/query db/db-spec ["SELECT * FROM posts WHERE published=? ORDER BY updated DESC LIMIT ?" true 5])]
-                  (utils/summary-block  ;; FIXME: this fn is fucked...
-                   5
-                   (post :title)
-                   (markdown.core/md-to-html-string (post :content))
-                   "#"
-                   "FIXME")))])
+                  [:div
+                   [:h2 (post :title)]
+                   ;; TODO: show timestamp(s) here, too!
+                   (markdown.core/md-to-html-string (post :content))]))])
    :home))
+
+(defn view-post [id]
+  (layout/layout
+   ((db/blog-info) :title)
+   (html
+    [:div.row
+     (let [id-int (try (Integer/parseInt id)
+                       (catch NumberFormatException e -1))
+           post (first (jdbc/query db/db-spec ["SELECT * FROM posts WHERE id = ? AND published = ? LIMIT 1;" id-int true]))]  ;; FUTURE: check blog_id, too.
+       (if post
+         [:div
+          [:h1 (post :title)]
+          ;; TODO: show timestamp(s) here, too!
+          (markdown.core/md-to-html-string (post :content))]
+         (str "Error: no post with id \"" id "\".")))])  ;; FUTURE: make it a real 404?
+   :post))
 
 (defn view-about []
   (layout/layout
@@ -28,6 +41,6 @@
     (html
      ;; TEMPORARY?: assumes docs[about] exists, not null, etc.
      (markdown.core/md-to-html-string
-      ((first (jdbc/query db/db-spec ["select content from docs where slug = 'about' limit 1;"]))
+      ((first (jdbc/query db/db-spec ["SELECT content FROM docs WHERE slug = ? LIMIT 1;" "about"]))
        :content)))
     :about))

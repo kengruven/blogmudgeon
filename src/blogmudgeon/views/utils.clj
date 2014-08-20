@@ -20,11 +20,3 @@
   "includes inline css"
   [content]
   [:style {:type "text/css"} content])
-
-(defn summary-block
-  "creates a summary block with button to view details"
-  [width heading text button-href button-text]
-  [:div
-   [:h2 heading]
-   [:p text]
-   [:p [:a.btn {:href button-href} button-text]]])

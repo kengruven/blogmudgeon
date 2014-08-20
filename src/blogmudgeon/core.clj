@@ -10,6 +10,7 @@
 (defroutes main-routes
   (GET "/" [] (index/view-index))
   (GET "/about" [] (index/view-about))
+  (GET "/posts/:id" [id] (index/view-post id))
 
   ;; HACK:
   ;; - lein-ring "server" defaults to using "public/" for compojure routing here.

@@ -27,7 +27,7 @@
      ((db/blog-info) :title)]
     [:ul.nav.navbar-nav.navbar-right
      [:li {:class (if (= active-nav "about") "active" "")}
-      [:a {:href "about"} "About"]]]]])
+      [:a {:href "/about"} "About"]]]]])
 
       ;; FUTURE: let the user configure any number of static pages as top-tabs (left/right-aligned), with any markdown content they want?  sounds good...
 
