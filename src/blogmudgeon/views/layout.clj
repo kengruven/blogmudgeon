@@ -45,10 +45,10 @@
         [:div body]]
        [:div.col-md-3
         [:div.sidebar.hidden-print {:role "complementary"}
-         [:div.input-group.input-group-sm
-          [:input.form-control {:type "text" :style "border-top-left-radius:15px;border-bottom-left-radius:15px"}
+         [:div.input-group.input-group-sm.blogmudgeon-search
+          [:input.form-control {:type "text"}
            [:span.input-group-btn
-            [:button.btn.btn-default {:type "button" :style "border-top-right-radius: 15px;border-bottom-right-radius: 15px"} ""
+            [:button.btn.btn-default {:type "button"} ""
              [:span.glyphicon.glyphicon-search]]]]]
          [:hr]
          [:h5 "Recent"]

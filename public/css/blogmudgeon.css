@@ -53,3 +53,13 @@ div.sidebar {
     border-left: 1px solid lightgray;
     padding-left: 20px;
 }
+
+.blogmudgeon-search input.form-control[type="text"] {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.blogmudgeon-search button.btn[type="button"] {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}

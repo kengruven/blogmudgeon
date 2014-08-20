@@ -26,7 +26,6 @@ TODO LIST!
 --- add markdown editor
 
 - MISC:
-!-- move all styling from index.clj/layout.clj into blogmudgeon.css
 --- FUTURE: pick a better font for everything?
 --- automatic affiliate links, for amazon?
 --- a "forgot password" feature?  i can have the email address, but then i need to send email...

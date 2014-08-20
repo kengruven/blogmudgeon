@@ -12,9 +12,8 @@
    ((db/blog-info) :title)
    (html
     [:div.row
-     ;; most recent 5 articles
      (interpose [:hr]
-                (for [post (jdbc/query db/db-spec ["select * from posts where published=TRUE order by updated DESC limit 5"])]
+                (for [post (jdbc/query db/db-spec ["SELECT * FROM posts WHERE published=? ORDER BY updated DESC LIMIT ?" true 5])]
                   (utils/summary-block  ;; FIXME: this fn is fucked...
                    5
                    (post :title)
