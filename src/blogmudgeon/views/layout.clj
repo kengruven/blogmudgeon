@@ -2,12 +2,9 @@
   (:use [hiccup.core])
   (:require [clojure.java.jdbc :as jdbc]
             [blogmudgeon.views.utils :as utils]
-            [blogmudgeon.config :as config])
+            [blogmudgeon.config :as config]
+            [blogmudgeon.db.db :as db])
   (:import [java.util Calendar]))
-
-;; FIXME: where should this be, really?
-(def pgdb {:subprotocol "postgresql"
-           :subname "//localhost:5432/kenmudgeon"}) ;; FIXME: get db name from config.clj!
 
 (def nav
   {:home
@@ -27,7 +24,7 @@
   [:div.navbar.navbar-default {:id "blogmudgeon-navbar"}
    [:div.container
     [:a.navbar-brand {:href config/SITE-ROOT-PATH}
-     ((first (jdbc/query pgdb ["select * from blogs limit 1;"])) :title)]  ;; FIXME: extract blog-info into fn...
+     ((db/blog-info) :title)]
     [:ul.nav.navbar-nav.navbar-right
      [:li {:class (if (= active-nav "about") "active" "")}
       [:a {:href "about"} "About"]]]]])
@@ -57,8 +54,7 @@
          [:h5 "Recent"]
          [:ul.recent-posts
           ;; FUTURE: separate "recently updated" and "recently created", somehow...
-          ;; FIXME?: something better than raw sql string?
-          (for [post (jdbc/query pgdb ["select * from posts where published=TRUE order by updated DESC limit 5"])]
+          (for [post (jdbc/query db/db-spec ["SELECT * FROM posts WHERE published=? ORDER BY updated DESC LIMIT ?" true 5])]
             [:li [:a {:href (str "/posts/" (post :id))} (post :title)]])
          ]]]]]
 
@@ -68,4 +64,4 @@
         "Copyright (C) "
         (.get (Calendar/getInstance) Calendar/YEAR)
         " "
-        ((first (jdbc/query pgdb ["select * from users limit 1;"])) :name)]]]]]))
+        ((first (jdbc/query db/db-spec ["select * from users limit 1;"])) :name)]]]]]))

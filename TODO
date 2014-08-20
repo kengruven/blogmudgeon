@@ -4,7 +4,6 @@ TODO LIST!
 !-- add "log in" button (and "log out") -- in footer?
 
 - DATABASE:
-!-- extract 'pgdb' somewhere, and give it a better name!
 --- FUTURE: make version-of-post immutable...
 --- FUTURE: make styling (.css file, bootstrap theme?) user-configurable, in the db, somehow
 
