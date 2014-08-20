@@ -79,4 +79,19 @@ Server nginx config:
         }
 - ln -s /etc/nginx/sites-available/blogmudgeon /etc/nginx/sites-enabled/blogmudgeon
 
-TODO: add a database...
+Database, for development on OS X:
+- install Homebrew, if you haven't already
+- brew install postgresql
+- start it <http://stackoverflow.com/a/7975660>:
+
+        pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+
+- (do you need to run initdb here first?)
+- createdb YOUR_BLOG_NAME
+
+Database, on the server:
+- apt-get install postgresql
+- (do you need to run initdb here first?)
+- createdb YOUR_BLOG_NAME
+
+TODO: migrations!
