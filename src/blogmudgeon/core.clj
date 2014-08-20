@@ -9,6 +9,7 @@
 
 (defroutes main-routes
   (GET "/" [] (index/view-index))
+  (GET "/about" [] (index/view-about))
 
   ;; HACK:
   ;; - lein-ring "server" defaults to using "public/" for compojure routing here.

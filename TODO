@@ -14,7 +14,7 @@ TODO LIST!  visuals only, for starters:
 --- have it connect to a database, and do "select 1;" on page-load.
 --- make a 'blogs' table, with one record (id, title, author_name, author_email, colors/styles, etc.)
 --- make a 'posts' table, with (id, blog_id, content, created, updated)  [FOR NOW: edit in-place]
---- 
+--- make a 'docs' table, with (id, slug(?), name, content)  [FOR NOW: just (id, 'about', 'About', ...)]
 
 - SIDEBAR:
 --- FUTURE/MAYBE?: make the search box smaller?
@@ -23,7 +23,7 @@ TODO LIST!  visuals only, for starters:
 
 - MISC:
 --- FUTURE: pick a better font for everything?
-
+--- automatic affiliate links, for amazon?
 
 
 ----------------------------------------------------------------------
@@ -43,9 +43,3 @@ OLD LIST:
 ;; --- [ ] FIXME: style it not like a bulleted-list
 ;; --- [ ] TODO: make them links to the relevant articles...
 ;; --- [ ] FUTURE?: distinguish between "added" and "updated"?
-;; - [ ] mini-calendar
-;; --- [ ] generate actual dates, for the 5(?) weeks, leading up to the current week.
-;; ----- NEED: something to generate HTML(?) for one row of weeks!  right?
-;; --- [ ] MAYBE: show the month, too?  i think it's kind of important.
-;; --- [ ] make them bright, and link to the first(?) post of that date, if there is one
-;; --- [ ] add controls so i can scroll fwd/back one week at a time

@@ -18,18 +18,21 @@
         "This is a blog I'm writing.  I'm writing both a blog (kenmudgeon.com) and the software that powers it (github.com/kengruven/blogmudgeon)."
         "#"
         "Full article &rarr;")
+       [:hr]
        (utils/summary-block
         6
         "Second most recent post"
         "It doesn't really do anything yet."
         "#"
         "Nothing to see here &rarr;")
+       [:hr]
        (utils/summary-block
         5
         "Third most recent post"
         "The point of this, so far, is to make sure I can commit, push, and deploy easily."
         "#"
         "Nothing to see here &rarr;")
+       [:hr]
        (utils/summary-block
         5
         "Markdown test"
@@ -37,3 +40,10 @@
         "#"
         "Nothing to see here &rarr;")])
     :home))
+
+(defn view-about []
+  (layout/layout
+    "Blogmudgeon"  ;; TODO: make this the blog title
+    (html
+     "WRITEME: about this blog")  ;; TODO: read from config (db)
+    :about))
