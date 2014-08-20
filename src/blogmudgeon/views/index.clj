@@ -1,4 +1,6 @@
 (ns blogmudgeon.views.index
+  (:use [hiccup.core]
+        [markdown.core])
   (:require [clojure.java.jdbc :as jdbc]
             [blogmudgeon.views.utils :as utils]
             [blogmudgeon.views.layout :as layout]))
