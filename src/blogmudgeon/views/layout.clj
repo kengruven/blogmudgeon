@@ -1,8 +1,12 @@
 (ns blogmudgeon.views.layout
-  (:use [hiccup.core]
-        [hiccup.page])
-  (:require [blogmudgeon.views.utils :as utils]
-            [blogmudgeon.config :as config]))
+  (:require [clojure.java.jdbc :as jdbc]
+            [blogmudgeon.views.utils :as utils]
+            [blogmudgeon.config :as config])
+  (:import [java.util Calendar]))
+
+;; FIXME: where should this be, really?
+(def pgdb {:subprotocol "postgresql"
+           :subname "//localhost:5432/kenmudgeon"}) ;; FIXME: get db name from config.clj!
 
 (def nav
   {:home
@@ -21,7 +25,8 @@
 (defn nav-fixed [active-nav]
   [:div.navbar.navbar-default {:id "blogmudgeon-navbar"}
    [:div.container
-    [:a.navbar-brand {:href config/SITE-ROOT-PATH} config/SITE-TITLE]  ;; FIXME: get title from config (db)
+    [:a.navbar-brand {:href config/SITE-ROOT-PATH}
+     ((first (jdbc/query pgdb ["select * from blogs limit 1;"])) :title)]  ;; FIXME: extract blog-info into fn...
     [:ul.nav.navbar-nav.navbar-right
      [:li {:class (if (= active-nav "about") "active" "")}
       [:a {:href "about"} "About"]]]]])
@@ -50,16 +55,16 @@
          [:hr]
          [:h5 "Recent"]
          [:ul.recent-posts
-          [:li [:a {:href "/posts/1"} "Post 1"]]
-          [:li [:a {:href "/posts/2"} "Post 2"]]
-          [:li [:a {:href "/posts/17"} "Post 17"]]
-          [:li [:a {:href "/posts/99"} "Post 99"]]]
-         [:hr]
-         [:h5 "Links"]
-         [:ul
-          [:li "WRITEME"]]]]]]  ;; FUTURE: read list from db
+          ;; FUTURE: separate "recently updated" and "recently created", somehow...
+          ;; FIXME?: something better than raw sql string?
+          (for [post (jdbc/query pgdb ["select * from posts where published=TRUE order by updated DESC limit 5"])]
+            [:li [:a {:href (str "/posts/" (post :id))} (post :title)]])
+         ]]]]]
 
      [:footer.footer
       [:div.container.text-center
        [:p.text-muted.credit
-        "Copyright (C) YYYY  AUTHOR'S_NAME_HERE"]]]]]))
+        "Copyright (C) "
+        (.get (Calendar/getInstance) Calendar/YEAR)
+        " "
+        ((first (jdbc/query pgdb ["select * from users limit 1;"])) :name)]]]]]))

@@ -1,49 +1,39 @@
 (ns blogmudgeon.views.index
-  (:use [hiccup.core]
-        [hiccup.page]
-        [markdown.core])
-    (:require (blogmudgeon.views
-                [utils :as utils]
-                [layout :as layout])))
+  (:require [clojure.java.jdbc :as jdbc]
+            [blogmudgeon.views.utils :as utils]
+            [blogmudgeon.views.layout :as layout]))
+
+;; KLUGE: also in layout.clj!  where to put this?
+(def pgdb {:subprotocol "postgresql"
+           :subname "//localhost:5432/kenmudgeon"}) ;; FIXME: get db name from ??
 
 ;; FIXME: the main page should show entire articles.  i'll need a "summary" view (e.g., for search), but i won't use it here.
 (defn view-index []
   (layout/layout
-    "Blogmudgeon"  ;; TODO: make this the blog title
-    (html
-      [:div.row
-       (utils/summary-block
-        5
-        "Most recent post"
-        "This is a blog I'm writing.  I'm writing both a blog (kenmudgeon.com) and the software that powers it (github.com/kengruven/blogmudgeon)."
-        "#"
-        "Full article &rarr;")
-       [:hr]
-       (utils/summary-block
-        6
-        "Second most recent post"
-        "It doesn't really do anything yet."
-        "#"
-        "Nothing to see here &rarr;")
-       [:hr]
-       (utils/summary-block
-        5
-        "Third most recent post"
-        "The point of this, so far, is to make sure I can commit, push, and deploy easily."
-        "#"
-        "Nothing to see here &rarr;")
-       [:hr]
-       (utils/summary-block
-        5
-        "Markdown test"
-        (markdown.core/md-to-html-string "This string is *Markdown!*")
-        "#"
-        "Nothing to see here &rarr;")])
-    :home))
+   ((blog-info) :title)
+   (html
+    [:div.row
+     ;; most recent 5 articles
+     (interpose [:hr]
+                (for [post (jdbc/query pgdb ["select * from posts where published=TRUE order by updated DESC limit 5"])]
+                  (utils/summary-block  ;; FIXME: this fn is fucked...
+                   5
+                   (post :title)
+                   (markdown.core/md-to-html-string (post :content))
+                   "#"
+                   "FIXME")))])
+   :home))
+
+;; ASSUMES there's only one blog in this db!
+(defn blog-info []
+  (first (jdbc/query pgdb ["select * from blogs limit 1;"])))
 
 (defn view-about []
   (layout/layout
-    "Blogmudgeon"  ;; TODO: make this the blog title
+   ((blog-info) :title)
     (html
-     "WRITEME: about this blog")  ;; TODO: read from config (db)
+     ;; TEMPORARY?: assumes docs[about] exists, not null, etc.
+     (markdown.core/md-to-html-string
+      ((first (jdbc/query pgdb ["select content from docs where slug = 'about' limit 1;"]))
+       :content)))
     :about))

@@ -1,5 +1,5 @@
 (defproject blogmudgeon "0.0.1-SNAPSHOT"
-  :description "FIXME: write description"
+  :description "A simple little one-person blog"
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.1.8"]
                  [ring/ring-jetty-adapter "1.1.6"]

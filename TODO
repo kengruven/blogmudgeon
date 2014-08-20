@@ -1,45 +1,35 @@
-TODO LIST!  visuals only, for starters:
+TODO LIST!
 
-- NAVBAR:
---- get rid of "home" tab
---- get rid of "contact" tab -- everything ABOUT the blog goes on the "about" page
---- add shadows for header/footer
---- MAYBE?: make footer color go all the way to the bottom?
---- pick better colors!
-
-- CONTENT:
---- make article view better: permalink, title=link, no "full article->"?, etc.
+- SESSIONS:
+!-- add "log in" button (and "log out") -- in footer?
 
 - DATABASE:
---- have it connect to a database, and do "select 1;" on page-load.
---- make a 'blogs' table, with one record (id, title, author_name, author_email, colors/styles, etc.)
---- make a 'posts' table, with (id, blog_id, content, created, updated)  [FOR NOW: edit in-place]
---- make a 'docs' table, with (id, slug(?), name, content)  [FOR NOW: just (id, 'about', 'About', ...)]
+!-- extract 'pgdb' somewhere, and give it a better name!
+--- FUTURE: make version-of-post immutable...
+--- FUTURE: make styling (.css file, bootstrap theme?) user-configurable, in the db, somehow
+
+- CONTENT:
+!-- make /posts/%d actually show one article
+--- make article view better: permalink, title=link, no "full article->"?, etc.
+--- add RSS, and link in <head>
 
 - SIDEBAR:
---- FUTURE/MAYBE?: make the search box smaller?
+--- make search box actually make an ajax call, and put results in a list below it
 --- FUTURE: different icon for "created"/"updated" entries
 ----- and a way to toggle between them?
+--- FUTURE/MAYBE?: make the search box smaller?
+
+- HEADER/FOOTER:
+--- make "about" light up, when it's the page you're looking at
+--- MAYBE?: fix footer, so it doesn't float when you scroll down?
+
+- EDITOR:
+--- add markdown editor
 
 - MISC:
+!-- move all styling from index.clj/layout.clj into blogmudgeon.css
 --- FUTURE: pick a better font for everything?
 --- automatic affiliate links, for amazon?
-
-
-----------------------------------------------------------------------
-
-OLD LIST:
-
-;; TODO:
-;; - [ ] make regular content go around it, not under it!  how?
-;; - [.] title area (who/what)
-;; --- [ ] TODO: get name/info from database
-;; --- [ ] TODO: link to full contact-info page?  ("about..." -> /about, maybe?  like app name -> about in a desktop app!)
-;; - [.] search box
-;; --- [ ] FIXME: move styling out into blogmudgeon.css
-;; --- [ ] TODO: make click/return actually do something -- submit request, show results right below it (ajax?)?
-;; - [?] (log-in button?)
-;; - [ ] recent additions/update (3-5?)
-;; --- [ ] FIXME: style it not like a bulleted-list
-;; --- [ ] TODO: make them links to the relevant articles...
-;; --- [ ] FUTURE?: distinguish between "added" and "updated"?
+--- a "forgot password" feature?  i can have the email address, but then i need to send email...
+--- a link to the github page?  (better: put it in an HTML comment.)
+--- add import/export -- this can double as an easy backup system

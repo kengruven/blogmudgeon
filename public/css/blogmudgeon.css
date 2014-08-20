@@ -27,7 +27,7 @@ body {
 }
 
 footer.footer {
-    background-image: linear-gradient(-10deg, rgb(150,170,180) 0%, rgb(190,195,205) 100%);
+    background-image: linear-gradient(-10deg, rgb(130,150,160) 0%, rgb(170,175,185) 100%);
     box-shadow: inset 0px 12px 10px -10px rgba(0, 0, 0, 0.70);
 
     position: fixed;  /* HACK: this is not quite what i want... */
