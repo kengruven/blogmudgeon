@@ -59,10 +59,7 @@ INSERT INTO docs (blog_id, name, slug, content)
                'about',
                'This is a new blog, which has not been configured yet.');
 
--- NOTE: don't need a text index to search!
--- e.g., search for posts with content matching 'blog' with:
---   select * from posts where to_tsvector(title || ' ' || content) @@ to_tsquery('blog');
--- but if i have more than a couple posts, it'd be nice to make an index:
+-- NOTE: don't need a text index to search!  but it'd be nice:
 --   http://www.postgresql.org/docs/8.3/static/textsearch-tables.html
 -- for ranking:
 --   http://www.postgresql.org/docs/8.3/static/textsearch-controls.html#TEXTSEARCH-RANKING

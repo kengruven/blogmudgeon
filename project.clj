@@ -6,6 +6,7 @@
                  [hiccup "1.0.5"]
                  [markdown-clj "0.9.47"]
                  [org.clojure/java.jdbc "0.3.5"]
-                 [postgresql "9.1-901.jdbc4"]]
+                 [postgresql "9.1-901.jdbc4"]
+                 [org.clojure/data.json "0.2.5"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler blogmudgeon.core/app})

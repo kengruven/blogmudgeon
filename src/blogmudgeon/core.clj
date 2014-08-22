@@ -11,6 +11,11 @@
   (GET "/" [] (index/view-index))
   (GET "/about" [] (index/view-about))
   (GET "/posts/:id" [id] (index/view-post id))
+  (POST "/posts/search" request (index/view-search request))
+
+  (GET "/images/spinner.svg" [] {:status 200
+                                 :headers {"Content-Type" "image/svg+xml"}
+                                 :body (index/view-spinner)})
 
   ;; HACK:
   ;; - lein-ring "server" defaults to using "public/" for compojure routing here.

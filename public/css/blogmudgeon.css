@@ -63,3 +63,42 @@ div.sidebar {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
+
+div.blogmudgeon-search-results {
+    display: none;
+    margin-top: 1em;
+}
+div.blogmudgeon-search-results ul {
+    list-style: none;
+}
+div.blogmudgeon-search-results ul li {
+    position: relative;
+    left: -2em;
+}
+
+img.spinner {
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: steps(12);
+    -moz-animation-name: rotate;
+    -moz-animation-duration: 2s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: steps(12);
+    -animation-name: rotate;
+    -animation-duration: 2s;
+    -animation-iteration-count: infinite;
+    -animation-timing-function: steps(12);
+}
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
+}
+@-keyframes rotate {
+    from {-transform: rotate(0deg);}
+    to {-transform: rotate(360deg);}
+}

@@ -1,9 +1,24 @@
-TODO LIST!
+TODO!
 
 - SESSIONS:
 --- add "log in" button (and "log out") -- in footer?
 
+- SEARCH
+--- [ ] STYLING: make :h5 small-caps, and un-indent lists completely.  (Q: how do i know when one line-wrapping item ends, then?)
+--- [ ] handle failure of the ajax call -- put an error notice here?  (Q: should the server generate this?  it's easiest there, but the client has to deal with the error condition of the server going dead, anyway.)
+----- just chain a .fail() call, and have it change the [:h5] to "Error during search"
+--- [.] make the ajax query show /images/spinner.svg on start_search()
+--- [ ] in view-search, sort results by ranking!  (see schema.db for links)
+--- [ ] add a proper db index
+--- [?] FUTURE: pagination?  if i'm only displaying 5, that could be nice -- if i have only a few posts.
+--- [ ] animate showing/hiding of results box (?)
+--- [ ] FUTURE/DESIGN: are blog titles too long for the sidebar?  should it expand into a full normal page of search results?  hmm...
+--- [ ] FUTURE/DESIGN: does it need a search button?  can it search as you type?
+--- [ ] put search term in search results box, somehow (e.g., "No results for 'foo'")
+--- [ ] FUTURE: put total count in results title, too?  (e.g., "Results 1-5 of 52")
+
 - DATABASE:
+--- extract db name from db/db.clj -- just move db-spec into config.clj?
 --- FUTURE: make version-of-post immutable...
 --- FUTURE: make styling (.css file, bootstrap theme?) user-configurable, in the db, somehow
 
@@ -13,7 +28,6 @@ TODO LIST!
 --- add RSS, and link to it in <head>
 
 - SIDEBAR:
---- make search box actually make an ajax call, and put results in a list below it
 --- next to each post, show the timestamp (created? updated?).  (as relative, but click/tap to toggle absolute?)
 --- FUTURE: different icon for "created"/"updated" entries
 ----- and a way to toggle between them?
@@ -26,6 +40,7 @@ TODO LIST!
 --- add markdown editor
 
 - MISC:
+--- make blog title (top left of header) highlight on hover, too.  it's weird that it doesn't.
 --- FUTURE: pick a better font for everything?
 --- automatic affiliate links, for amazon?
 --- a "forgot password" feature?  i can have the email address, but then i need to send email...

@@ -2,6 +2,7 @@
   (:use [hiccup.core]
         [markdown.core])
   (:require [clojure.java.jdbc :as jdbc]
+            [clojure.data.json :as json]
             [blogmudgeon.views.utils :as utils]
             [blogmudgeon.views.layout :as layout]
             [blogmudgeon.db.db :as db]))
@@ -34,6 +35,36 @@
           (markdown.core/md-to-html-string (post :content))]
          (str "Error: no post with id \"" id "\".")))])  ;; FUTURE: make it a real 404?
    :post))
+
+;; TO USE: [:img.spinner {:src "/images/spinner.svg" :width 25 :height 25}]
+;; (or however big you want it)
+(defn view-spinner []
+  (html
+   [:svg {:xmlns "http://www.w3.org/2000/svg" :xmlns:xlink "http://www.w3.org/1999/xlink"
+          :width "25px" :height "25px" :viewBox "0 0 100 100"}
+    (let [blades 12
+          r1 25
+          r2 50
+          thickness 12]
+      (for [angle (range 1 360 (/ 360 blades))]
+        [:rect {:x (+ 50 r1)
+                :y (- 50 (/ thickness 2))
+                :width (- r2 r1)
+                :height thickness
+                :style (str "fill: #333; fill-opacity: " (/ angle 360.0))
+                :transform (str "rotate(" angle ", 50, 50)")}]))]))
+
+(defn view-search [request]
+  ;; TODO: add timestamp to these, somehow.
+  ;; FUTURE: restrict results to this blog_id
+  (let [query ((request :params) :query)
+        results (jdbc/query db/db-spec ["SELECT id, title, created, updated FROM posts WHERE published=? AND to_tsvector(title || ' ' || content) @@ to_tsquery(?) LIMIT ?;" true query 5])]
+    (json/write-str
+     {:count (count results)
+      :html (html
+             [:ul
+              (for [post results]
+                [:li [:a {:href (str "/posts/" (post :id))} (post :title)]])])})))
 
 (defn view-about []
   (layout/layout

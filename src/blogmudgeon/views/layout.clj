@@ -18,7 +18,8 @@
    (utils/include-css "/css/bootstrap.min.css")
    (utils/include-css "/css/blogmudgeon.css")
    (utils/include-js "/js/jquery-2.1.1.min.js")
-   (utils/include-js "/js/bootstrap.js")])
+   (utils/include-js "/js/bootstrap.js")
+   (utils/include-js "/js/blogmudgeon.js")])
 
 (defn nav-fixed [active-nav]
   [:div.navbar.navbar-default {:id "blogmudgeon-navbar"}
@@ -50,6 +51,9 @@
            [:span.input-group-btn
             [:button.btn.btn-default {:type "button"} ""
              [:span.glyphicon.glyphicon-search]]]]]
+         [:div.blogmudgeon-search-results
+          [:h5 "Results"]
+          [:div.target]]
          [:hr]
          [:h5 "Recent"]
          [:ul.recent-posts
