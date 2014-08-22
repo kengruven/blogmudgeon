@@ -19,13 +19,16 @@
    (utils/include-css "/css/blogmudgeon.css")
    (utils/include-js "/js/jquery-2.1.1.min.js")
    (utils/include-js "/js/bootstrap.js")
-   (utils/include-js "/js/blogmudgeon.js")])
+   (utils/include-js "/js/blogmudgeon.js")
+   [:link {:rel "alternate"
+           :type "application/atom+xml"
+           :title (str ((db/blog-info) :title) " Feed")
+           :href "/feeds/atom.xml"}]])
 
 (defn nav-fixed [active-nav]
   [:div.navbar.navbar-default {:id "blogmudgeon-navbar"}
    [:div.container
-    [:a.navbar-brand {:href config/SITE-ROOT-PATH}
-     ((db/blog-info) :title)]
+    [:a.navbar-brand {:href "/"} ((db/blog-info) :title)]
     [:ul.nav.navbar-nav.navbar-right
      [:li {:class (if (= active-nav "about") "active" "")}
       [:a {:href "/about"} "About"]]]]])
@@ -58,7 +61,7 @@
          [:h5 "Recent"]
          [:ul.recent-posts
           ;; FUTURE: separate "recently updated" and "recently created", somehow...
-          (for [post (jdbc/query db/db-spec ["SELECT * FROM posts WHERE published=? ORDER BY updated DESC LIMIT ?" true 5])]
+          (for [post (jdbc/query config/db-spec ["SELECT * FROM posts WHERE published=? ORDER BY updated DESC LIMIT ?;" true 5])]
             [:li [:a {:href (str "/posts/" (post :id))} (post :title)]])
          ]]]]]
 
@@ -68,4 +71,4 @@
         "Copyright (C) "
         (.get (Calendar/getInstance) Calendar/YEAR)
         " "
-        ((first (jdbc/query db/db-spec ["select * from users limit 1;"])) :name)]]]]]))
+        ((db/user-info) :name)]]]]]))

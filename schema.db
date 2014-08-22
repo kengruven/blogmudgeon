@@ -15,12 +15,15 @@ CREATE TABLE users (
 
 CREATE TABLE blogs (
     id SERIAL PRIMARY KEY,
+    uuid UUID NOT NULL,
     title VARCHAR NOT NULL,
+    subtitle VARCHAR,
     user_id INTEGER REFERENCES users (id)
 );
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
+    uuid UUID NOT NULL,
     blog_id INTEGER REFERENCES blogs (id),
     title VARCHAR NOT NULL,
     content TEXT NOT NULL,
@@ -29,6 +32,7 @@ CREATE TABLE posts (
     published BOOLEAN NOT NULL
 );
 
+-- FUTURE: can i unify this with 'posts'?  they seem like they're both trying to solve the same problem, just with a link in a different place in the HTML.
 CREATE TABLE docs (
     id SERIAL PRIMARY KEY,
     blog_id INTEGER REFERENCES blogs (id),
@@ -41,12 +45,15 @@ CREATE TABLE docs (
 INSERT INTO users (login, email, name, password, salt)
        VALUES ('ken', 'kengruven@gmail.com', 'Ken Harris', 'XXX', 'XXX');
 
-INSERT INTO blogs (title, user_id)
-       VALUES ('Kenmudgeon',
+INSERT INTO blogs (uuid, title, subtitle, user_id)
+       VALUES ('21498d42-24c0-409b-b847-98e87f017ee4',
+               'Kenmudgeon',
+               'All software is terrible',
                (select id from users where login = 'ken' limit 1));
 
-INSERT INTO posts (blog_id, title, content, created, updated, published)
-       VALUES ((select id from users where login = 'ken' limit 1),
+INSERT INTO posts (uuid, blog_id, title, content, created, updated, published)
+       VALUES ('56284cd1-f3cb-4826-966b-2e808f1786d0',
+               (select id from users where login = 'ken' limit 1),
                'Greeting',
                'Hello, world!',
                CURRENT_TIMESTAMP,

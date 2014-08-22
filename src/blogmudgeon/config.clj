@@ -1,7 +1,6 @@
 (ns blogmudgeon.config)
 
-;;Someday might load these from file to support multiple environments
+(def db-spec {:subprotocol "postgresql"
+              :subname "//localhost:5432/kenmudgeon"})
 
-(def SITE-TITLE "Project Name")
-(def SITE-ROOT-PATH "/")
-
+(def blog-host "http://kenmudgeon.com/")

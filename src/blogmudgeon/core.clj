@@ -11,6 +11,9 @@
   (GET "/" [] (index/view-index))
   (GET "/about" [] (index/view-about))
   (GET "/posts/:id" [id] (index/view-post id))
+  (GET "/feeds/atom.xml" [] {:status 200
+                             :headers {"Content-Type" "application/atom+xml"}
+                             :body (index/view-atom-feed)})
   (POST "/posts/search" request (index/view-search request))
 
   (GET "/images/spinner.svg" [] {:status 200

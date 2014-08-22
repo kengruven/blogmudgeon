@@ -18,14 +18,12 @@ TODO!
 --- [ ] FUTURE: put total count in results title, too?  (e.g., "Results 1-5 of 52")
 
 - DATABASE:
---- extract db name from db/db.clj -- just move db-spec into config.clj?
 --- FUTURE: make version-of-post immutable...
 --- FUTURE: make styling (.css file, bootstrap theme?) user-configurable, in the db, somehow
 
 - CONTENT:
 --- on /post/:id page, show timestamp
 --- make article view better: permalink, title=link?, etc.
---- add RSS, and link to it in <head>
 
 - SIDEBAR:
 --- next to each post, show the timestamp (created? updated?).  (as relative, but click/tap to toggle absolute?)
