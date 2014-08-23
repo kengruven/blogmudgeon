@@ -11,7 +11,8 @@ open-sourcing.
 Goals:
 - As simple as possible, internally and externally, for readers, writers, and maintainers
 - Runs on modern browsers (incl mobile) -- no particular backwards-compat goals
-- Assume it's Postgres on the backend (i.e., not RDBMS-agnostic)
+- Only needs Postgres and Java runtime on the server to run
+- Only needs Postgres, Java, and Leiningen for development (plus whatever lein pulls in automatically)
 - Readers can:
   - read articles
   - see stable, readable, typeable URLs

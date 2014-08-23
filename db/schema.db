@@ -1,0 +1,48 @@
+-- There are at least 4 different migration systems for Clojure,
+-- and they all seem to have different tradeoffs.  I'll probably
+-- pick one, someday, and fix up its limitations.  For now,
+-- I just need a really simple database, so here's a SQL script
+-- to throw at Postgres.
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    login VARCHAR NOT NULL,
+    email VARCHAR NOT NULL,
+    name VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    salt VARCHAR NOT NULL
+);
+
+CREATE TABLE blogs (
+    id SERIAL PRIMARY KEY,
+    uuid UUID NOT NULL,
+    title VARCHAR NOT NULL,
+    subtitle VARCHAR,
+    user_id INTEGER REFERENCES users (id)
+);
+
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    uuid UUID NOT NULL,
+    blog_id INTEGER REFERENCES blogs (id),
+    title VARCHAR NOT NULL,
+    content TEXT NOT NULL,
+    created TIMESTAMP NOT NULL,
+    updated TIMESTAMP NOT NULL,
+    published BOOLEAN NOT NULL
+);
+
+-- FUTURE: can i unify this with 'posts'?  they seem like they're both trying to solve the same problem, just with a link in a different place in the HTML.
+CREATE TABLE docs (
+    id SERIAL PRIMARY KEY,
+    blog_id INTEGER REFERENCES blogs (id),
+    name VARCHAR NOT NULL,
+    slug VARCHAR NOT NULL,
+    content TEXT NOT NULL
+);
+
+-- NOTE: you don't need a text index to search!  but it might be nice.
+-- strangely, with my (tiny) test data, creating this index seems to improve
+-- the EXPLAIN output, but increase the latency of search requests by 50%.
+-- maybe it'll be useful when I have more than 3 posts to search?
+-- CREATE INDEX posts_index ON posts USING gin(to_tsvector('english', title || ' ' || content));

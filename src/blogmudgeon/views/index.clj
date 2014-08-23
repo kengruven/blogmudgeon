@@ -97,8 +97,9 @@
 (defn view-search [request]
   ;; TODO: add timestamp to these, somehow.
   ;; FUTURE: restrict results to this blog_id
+  ;; FUTURE/PERF: this is not a pretty query...
   (let [query ((request :params) :query)
-        results (jdbc/query config/db-spec ["SELECT id, title, created, updated FROM posts WHERE published=? AND to_tsvector(title || ' ' || content) @@ to_tsquery(?) LIMIT ?;" true query 5])]
+        results (jdbc/query config/db-spec ["SELECT id, title, ts_rank(to_tsvector(title || ' ' || content), to_tsquery(?)) AS rank FROM posts WHERE published=? AND to_tsquery(?) @@ to_tsvector(title || ' ' || content) ORDER BY rank DESC LIMIT ?;" query true query 5])]
     (json/write-str
      {:count (count results)
       :html (html
