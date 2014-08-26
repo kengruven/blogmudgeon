@@ -1,6 +1,7 @@
 (ns blogmudgeon.views.layout
   (:use [hiccup.core])
   (:require [clojure.java.jdbc :as jdbc]
+            [cemerick.friend :as friend]
             [blogmudgeon.views.utils :as utils]
             [blogmudgeon.config :as config]
             [blogmudgeon.db.db :as db])
@@ -71,4 +72,8 @@
         "Copyright (C) "
         (.get (Calendar/getInstance) Calendar/YEAR)
         " "
-        ((db/user-info) :name)]]]]]))
+        ((db/user-info) :name)
+        " "
+        (if (friend/current-authentication)
+          [:a.loginout {:href "/logout"} "Log out"]
+          [:a.loginout {:href "/login"} "Log in"])]]]]]))

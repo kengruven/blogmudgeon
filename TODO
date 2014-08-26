@@ -1,7 +1,17 @@
 TODO!
 
-- SESSIONS:
---- add "log in" button (and "log out") -- in footer?
+- SESSIONS: let me log in/out!
+--- [ ] change /secret into /home, which calls view-home, and has functionality for change-password, etc.
+--- [ ] when logged in, show different stuff than before:
+----- left sidebar, with controls?
+----- next to "log out" link, show name, too
+----- "new post", etc.
+--- [ ] FUTURE?: on /login, also have a "forgot password?" link, which sends email with a reset link.
+--- [ ] FUTURE: a "change password" link?
+--- [ ] FUTURE: figure out SSL...
+--- [ ] FUTURE: on failed password, focus password field first?
+--- [ ] FUTURE: make log-in page into a dialog box
+
 
 - SEARCH
 --- [ ] STYLING: make :h5 small-caps, and un-indent lists completely.  (Q: how do i know when one line-wrapping item ends, then?)

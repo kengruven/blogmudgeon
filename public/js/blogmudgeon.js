@@ -10,6 +10,8 @@ $(document).ready(function () {
     submit.click(function() {
         start_search();
     });
+
+    $("input#username[type='text']").focus();
 });
 
 function start_search() {

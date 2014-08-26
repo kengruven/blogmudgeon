@@ -1,9 +1,12 @@
 (ns blogmudgeon.views.index
   (:use [hiccup.core]
         [hiccup.page]
-        [markdown.core])
+        [hiccup.form]
+        [markdown.core]
+        [ring.util.response])
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.data.json :as json]
+            [cemerick.friend :as friend]
             [blogmudgeon.views.utils :as utils]
             [blogmudgeon.views.layout :as layout]
             [blogmudgeon.db.db :as db]
@@ -21,6 +24,28 @@
                    ;; TODO: show timestamp(s) here, too!
                    (markdown.core/md-to-html-string (post :content))]))])
    :home))
+
+;; FUTURE: implement this as a dialog box (ajax)?
+(defn view-login [request]
+  (layout/layout
+   (str "Log in to edit blog '" ((db/blog-info) :title) "'")
+   (html
+    (let [bad-pw? (= "Y" ((request :params) :login_failed))]
+      (form-to [:post "/login"]
+               [:table.form
+                [:tr
+                 [:th (label "username" "Login:")]
+                 [:td (text-field "username" ((request :params) :username))]]
+                [:tr
+                 [:th (label "password" "Password:")]
+                 [:td (if bad-pw? {:class "errorbox"} {})
+                  (password-field "password")]]
+                [:tr
+                 [:td]
+                 [:td.errortext (if (= "Y" ((request :params) :login_failed)) "Incorrect login or password")]]
+                [:tr
+                 [:td.buttons {:colspan 2} (submit-button "Log In")]]])))
+   :login))
 
 (defn first-paragraph [markdown]
   ;; in 'single-line mode' (i.e., match newlines as any other char),

@@ -1,9 +1,9 @@
 -- On top of the raw schema, here's my basic info.
 -- Clearly this won't work for anyone who has a different email address than me.
 
--- no password by default: figure out some way to set it...
-INSERT INTO users (login, email, name, password, salt)
-       VALUES ('ken', 'kengruven@gmail.com', 'Ken Harris', 'XXX', 'XXX');
+-- password is (cemerick.friend.credentials/hash-bcrypt "abc")
+INSERT INTO users (login, email, name, password)
+       VALUES ('ken', 'kengruven@gmail.com', 'Ken Harris', '$2a$10$vPpCjCwe0zzfdRaW5/tPeeilr4mR/jfpoDF53aSxJtDRmfZK1DhWm');
 
 INSERT INTO blogs (uuid, title, subtitle, user_id)
        VALUES ('21498d42-24c0-409b-b847-98e87f017ee4',
